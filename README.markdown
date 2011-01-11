@@ -9,13 +9,13 @@ NOTICE : this project is under highly development,can't not be used in productiv
 
 Pre-install:
 ==============
-  This search engine is written in PHP and is base on [redis][http://redis.io]
-  and [scws][http://www.ftphp.com/scws/](a chinese word spliter).So you need to install 
+  This search engine is written in PHP and is base on [redis](http://redis.io "redis home page")
+  and [scws](http://www.ftphp.com/scws/ "a chinese word spliter").So you need to install 
   a capable runtime environment at first:
 
   You need a webserver(like apache or nginx),a php module(php5_module for apache,
   or php-fpm for nginx),a php extension for redis operations(here we use [phpredis]
-  [https://github.com/owlient/phpredis]) and the scws extension(can be found in this
+  (https://github.com/owlient/phpredis "phpredis on github")) and the scws extension(can be found in this
   repository).
 
 Usage:

@@ -3,9 +3,9 @@ Redis Fulltext Search Engine for chinese
 
 It's a new project,mostly used for replace the use fulltext search in mysql for chinese website.
 Any questions? Mail me : wenhui#ciikii.com (you know it~)
-################################################################################################
+
 NOTICE : this project is under highly development,can't not be used in productive situation!!!!!
-################################################################################################
+
 
 Pre-install:
 ==============
@@ -14,8 +14,7 @@ Pre-install:
   a capable runtime environment at first:
 
   You need a webserver(like apache or nginx),a php module(php5_module for apache,
-  or php-fpm for nginx),a php extension for redis operations(here we use [phpredis]
-  (https://github.com/owlient/phpredis "phpredis on github")) and the scws extension(can be found in this
+  or php-fpm for nginx),a php extension for redis operations(here we use [phpredis](https://github.com/owlient/phpredis "phpredis on github")) and the scws extension(can be found in this
   repository).
 
 Usage:

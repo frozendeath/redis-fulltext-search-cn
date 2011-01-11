@@ -1,3 +1,6 @@
+Redis Fulltext Search Engine for chinese
+===========================================
+
 It's a new project,mostly used for replace the use fulltext search in mysql for chinese website.
 Any questions? Mail me : wenhui#ciikii.com (you know it~)
 ################################################################################################
@@ -5,7 +8,7 @@ NOTICE : this project is under highly development,can't not be used in productiv
 ################################################################################################
 
 Pre-install:
-
+==============
   This search engine is written in PHP and is base on redis(http://redis.io)
   and scws(a chinese word spliter,http://www.ftphp.com/scws/).So you need to install 
   a capable runtime environment at first:
@@ -16,3 +19,4 @@ Pre-install:
   repository).
 
 Usage:
+===============

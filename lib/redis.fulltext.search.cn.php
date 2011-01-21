@@ -1,3 +1,4 @@
+<?php
 /*
  *
  *
@@ -6,7 +7,7 @@
 class RedisFSC{
 
     var $notime; //currenttime
-    var $this->cws;   //chinese word spliter
+    var $cws;   //chinese word spliter
     var $key_prefix;  //key prefix for the whole search engine
     var $key_contentid;   //key for {contentid} set
     var $key_index_prefix;  //key prefix for the index
@@ -17,13 +18,13 @@ class RedisFSC{
      *
      */
     
-    function RedisFSC($redislink){
+    function RedisFSC(){
         $this->nowtime = time();
         $this->keyprefix = "RFSC";
         $this->key_contentid = "{$this->keyprefix}:content:id";
         $this->key_index_prefix = "{$this->keyprefix}:index";
         $this->resultreturntype = "string";
-        if($redislink){
+        if(isset($redislink)){
             $this->r = $redislink;
         }else{
             $this->r = new Redis();
@@ -41,7 +42,7 @@ class RedisFSC{
       
     }
     
-    function index($content){
+    function index($content,$postid){
         if(empty($content)){
             return true;
         }
@@ -54,7 +55,7 @@ class RedisFSC{
                 }elseif ($tmp['len'] == 1 && $tmp['word'] == "\n"){
                     continue;
                 }else{
-                    $r->zAdd("{$this->key_index_prefix}:time:{$tmp['word']}",$nowtime,$postid);
+                    $this->r->zAdd("{$this->key_index_prefix}:time:{$tmp['word']}",$this->nowtime,$postid);
                 }
             }
         }
@@ -65,7 +66,7 @@ class RedisFSC{
         if(empty($key)){
             return true;
         }
-        $this->cws->send_text($keyword);
+        $this->cws->send_text($key);
         $keyarray = array();
         while ($res = $this->cws->get_result()){
             foreach ($res as $tmp)
@@ -75,16 +76,16 @@ class RedisFSC{
                 }elseif ($tmp['len'] == 1 && $tmp['word'] == "\n"){
                     continue;
                 }else{
-                    $keyarray[] = "index:time:{$tmp['word']}";
+                    $keyarray[] = "{$this->key_index_prefix}:time:{$tmp['word']}";
                 }
             }
         }
         $randomkey = rand(0,9999);
         $this->cws->close();
-        $tmpkeyname = "{$this->keyprefix}:tmpkey:{$nowtime}{$randomkey}";
-        $r->zInter($tmpkeyname ,$keyarray);
-        $data = $r->sort($tmpkeyname,array('get'=>"post:*",'sort'=>$resultorder));
+        $tmpkeyname = "{$this->keyprefix}:tmpkey:{$this->nowtime}{$randomkey}";
+        $this->r->zInter($tmpkeyname ,$keyarray);
+        $data = $this->r->sort($tmpkeyname,array('get'=>"#",'sort'=>$resultorder));
         return $this->resultreturntype=="string"?join(",",$data):$data;
     }
-
 }
+?>

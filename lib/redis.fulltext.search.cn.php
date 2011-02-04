@@ -1,7 +1,6 @@
 <?php
 /*
- *
- *
+ *RedisFSC,Redis fulltext search for chinese
  */
  
 class RedisFSC{
@@ -15,7 +14,7 @@ class RedisFSC{
     var $resultreturntype;
     
     /*
-     *
+     *RedisFSC,constructor
      */
     
     function RedisFSC(){
@@ -36,11 +35,17 @@ class RedisFSC{
         $this->cws->set_charset('utf8');
         $multi = 8;
         $this->cws->set_duality(false);
-        $this->cws->set_ignore(true);  //ignore punctuations?
+        $this->cws->set_ignore(true);  //ignore punctuations
         $this->cws->set_multi($multi);
         //end
       
     }
+    
+    /*
+     *index
+     *param $content,content to index
+     *param $postid,primary key of message in another database
+     */
     
     function index($content,$postid){
         if(empty($content)){
@@ -55,13 +60,19 @@ class RedisFSC{
                 }elseif ($tmp['len'] == 1 && $tmp['word'] == "\n"){
                     continue;
                 }else{
-                    $this->r->zAdd("{$this->key_index_prefix}:time:{$tmp['word']}",$this->nowtime,$postid);
+                    $this->r->zAdd("{$this->key_index_prefix}:postid:{$tmp['word']}",$postid,$postid);
                 }
             }
         }
         return true;
     }
     
+    /*
+     *search
+     *param $key,keyword to search
+     *param $resultorder,order of search result 'desc' or 'asc'
+     */
+     
     function search($key,$resultorder="desc"){
         if(empty($key)){
             return true;
@@ -82,9 +93,9 @@ class RedisFSC{
         }
         $randomkey = rand(0,9999);
         $this->cws->close();
-        $tmpkeyname = "{$this->keyprefix}:tmpkey:{$this->nowtime}{$randomkey}";
+        $tmpkeyname = "{$this->keyprefix}:tmp:{$this->nowtime}{$randomkey}";
         $this->r->zInter($tmpkeyname ,$keyarray);
-        $data = $this->r->sort($tmpkeyname,array('get'=>"#",'sort'=>$resultorder));
+        $data = $this->r->zRange($tmpkeyname,0,-1);
         return $this->resultreturntype=="string"?join(",",$data):$data;
     }
 }

@@ -2,7 +2,7 @@ Redis Fulltext Search Engine for chinese
 ===========================================
 
 It's a new project,mostly used for replace the use fulltext search in mysql for chinese website.
-Any questions? Mail me : wenhui#ciikii.com (you know it~)
+Any questions? Mail me : wenhui#ncu.me (you know it~)
 
 NOTICE : this project is under highly development,can't not be used in productive situation!!!!!
 
@@ -19,3 +19,4 @@ Pre-install:
 
 Usage:
 ===============
+  look example/index.php

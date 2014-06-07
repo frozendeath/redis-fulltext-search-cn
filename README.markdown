@@ -10,7 +10,7 @@ NOTICE : this project is under highly development,can't not be used in productiv
 Pre-install:
 ==============
   This search engine is written in PHP and is base on [redis](http://redis.io "redis home page")
-  and [scws](http://www.ftphp.com/scws/ "a chinese word spliter").So you need to install 
+  and [scws](https://github.com/hightman/scws "a simple chinese word spliter").So you need to install 
   a capable runtime environment at first:
 
   You need a webserver(like apache or nginx),a php module(php5_module for apache,

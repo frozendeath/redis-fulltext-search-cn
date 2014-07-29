@@ -7,7 +7,7 @@ Any questions? Mail me : wenhui@ncu.me
 NOTICE : this project is under highly development,can't not be used in productive situation!!!!!
 
 
-Pre-install:
+Requirements:
 ==============
   This search engine is written in PHP and is base on [redis](http://redis.io "redis home page")
   and [scws](https://github.com/hightman/scws "a simple chinese word spliter").So you need to install 

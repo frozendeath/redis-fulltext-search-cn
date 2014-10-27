@@ -14,8 +14,7 @@ Requirements:
   a capable runtime environment at first:
 
   You need a webserver(like apache or nginx),a php module(php5_module for apache,
-  or php-fpm for nginx),a php extension for redis operations(here we use [phpredis](https://github.com/owlient/phpredis "phpredis on github")) and the scws extension(can be found in this
-  repository).
+  or php-fpm for nginx),a php extension for redis operations(here we use [phpredis](https://github.com/owlient/phpredis "phpredis on github")) and the scws extension(github project:[scws](https://github.com/hightman/scws "a simple chinese word spliter")).
 
 Usage:
 ===============
